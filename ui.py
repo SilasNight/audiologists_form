@@ -9,6 +9,9 @@ class Ui:
         self.window.config(bg="white")
         self.window.option_add("*Background", "white")
         self.window.geometry("800x800")
+        icon = tk.PhotoImage(file="images/ear.png")
+        self.window.iconphoto(True, icon)
+
         self.viewing_window = tk.Canvas(self.window, width=790, height=790)
         self.viewing_window.place(x=5, y=5)
 
