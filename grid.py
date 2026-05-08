@@ -51,16 +51,65 @@ class Grid:
         step_y = dif_y/y_lines
 
         step = 0
+        text = -20
+        label = self.side + " Ear"
+
+        self.canvas.create_text(175, 10, text=label)
+        self.canvas.create_text(175, 30, text="Frequency")
+        self.canvas.create_text(10, 366, text="M", font=("Helvetica", 8, "bold"))
 
         for i in range(x_lines):
             step += step_y
+            text += 10
             self.canvas.create_line(x_min, y_min + step, x_max, y_min + step)
+            self.canvas.create_text(x_min - 20, y_min + step, text=str(text))
 
         step = 0
+        text = 125
 
-        for i in range(y_lines):
+        for i in range(y_lines - 1):
+            if i < 4:
+                if i % 2 == 1:
+                    step += step_x
+                    continue
+
+            if i % 2 == 0:
+                self.canvas.create_line(x_min + step, y_min, x_min + step, y_max, width=2)
+            else:
+                self.canvas.create_line(x_min + step, y_min, x_min + step, y_max)
+
+            self.canvas.create_text(x_min + step, y_min - 10, text=str(self.format_text(text)))
+            text = self.change_text(text)
             step += step_x
-            self.canvas.create_line(x_min + step, y_min, x_min + step, y_max)
+
+    @staticmethod
+    def change_text(text: int) -> int:
+        if text < 500:
+            text *= 2
+        elif text < 1000:
+            text += 250
+        elif text < 1500:
+            text += 500
+        elif text < 4000:
+            text += 1000
+        else:
+            text += 2000
+
+        return text
+
+    @staticmethod
+    def format_text(text: int) -> str:
+        if text >= 1000:
+            if text == 1500:
+                return "1.5K"
+            else:
+                text = str(text)
+                char = text[:1]
+                output = f"{char}K"
+                return output
+        else:
+            text = str(text)
+            return text
 
     def add_text(self):
         pass
