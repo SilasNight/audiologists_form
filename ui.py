@@ -174,10 +174,10 @@ class Ui:
         self.contralatral_r = tk.Label(self.scrolling_window, text="Contaralateral R")
         self.reflex_decay_r = tk.Label(self.scrolling_window, text="Reflex Decay R")
         self.reflex_decay_l = tk.Label(self.scrolling_window, text="Reflex Decay L")
-        self.p_t_a_r = tk.Entry(self.scrolling_window, width=10, bg="gray90")
+        self.p_t_a_r = tk.Entry(self.scrolling_window, bg="gray90")
         self.p_t_a_l = tk.Entry(self.scrolling_window, width=10, bg="gray90")
         self.p_t_a_b = tk.Entry(self.scrolling_window, width=10, bg="gray90")
-        self.p_t_a_m = tk.Entry(self.scrolling_window, width=10, bg="gray90")
+        self.p_t_a_m = tk.Entry(self.scrolling_window, bg="gray90")
         self.two_f_a_r = tk.Entry(self.scrolling_window, width=10, bg="gray90")
         self.two_f_a_l = tk.Entry(self.scrolling_window, width=10, bg="gray90")
         self.two_f_a_b = tk.Entry(self.scrolling_window, width=10, bg="gray90")
@@ -229,10 +229,10 @@ class Ui:
         # End initialize bottom bit
 
         # Place bottom bit
-        self.top_r.place(x=50, y=825)
-        self.top_l.place(x=100, y=825)
-        self.top_b.place(x=150, y=825)
-        self.masking.place(x=200, y=825)
+        self.top_r.place(x=150, y=826)
+        self.top_l.place(x=200, y=826)
+        self.top_b.place(x=250, y=826)
+        self.masking.place(x=425, y=826)
         self.low_r.place(x=50, y=840)
         self.low_l.place(x=100, y=840)
         self.low_b.place(x=150, y=840)
@@ -271,10 +271,10 @@ class Ui:
         self.contralatral_r.place(x=100, y=960)
         self.reflex_decay_r.place(x=150, y=960)
         self.reflex_decay_l.place(x=200, y=960)
-        self.p_t_a_r.place(x=50, y=975)
+        self.p_t_a_r.place(x=50, y=975)  # self.p_t_a_r.place(x=425, y=849)
         self.p_t_a_l.place(x=100, y=975)
         self.p_t_a_b.place(x=150, y=975)
-        self.p_t_a_m.place(x=200, y=975)
+        self.p_t_a_m.place(x=425, y=849)  # self.p_t_a_m.place(x=200, y=975)
         self.two_f_a_r.place(x=50, y=990)
         self.two_f_a_l.place(x=100, y=990)
         self.two_f_a_b.place(x=150, y=990)
@@ -323,10 +323,30 @@ class Ui:
         self.reflex_decay_l_l.place(x=100, y=1155)
         self.reflex_decay_l_b.place(x=150, y=1155)
         self.reflex_decay_l_m.place(x=200, y=1155)
+
+        self.create_lower_bit()
         # End place bottom bit
         # End bottom bit
 
         self.window.mainloop()
+
+    def create_lower_bit(self):
+        self.scrolling_window.create_line(15, 825, 765, 825)
+
+        y = 0
+        for i in range(25):
+            y = 825 + (i * 22)
+            self.scrolling_window.create_line(15, y, 550, y)
+
+        print(y)
+        self.scrolling_window.create_line(15, y, 765, y)
+        # 422
+
+        x = 0
+        for i in range(5):
+            x = 550 - (i * 128)
+            self.scrolling_window.create_line(x, 825, x, 1353)
+        self.scrolling_window.create_line(15, 825, 15, 1353)
 
     def y(self):
         self.y_ += 20
